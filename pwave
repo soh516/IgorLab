@@ -1,0 +1,111 @@
+# kerberos
+authconfig --enablekrb5 --update --krb5realm=USASK.CA --krb5kdc=usaskdc5.usask.ca,usaskdc2.usask.ca,usaskdc6.usask.ca
+# yp
+echo "domain geophys server geofile.usask.ca" >> /etc/yp.conf
+service ypbind start
+chkconfig ypbind on
+# edit /etc/nsswitch
+# mount
+# edit /etc/auto.master
+# edit /etc/auto.geofile
+# edit /etc/auto.geoepos
+service autofs reload
+service autofs restart
+# on geofile
+service nfs restart
+# on geoepos
+service nfs restart
+# try to login with soh516 and verify mount
+# Add soh516 and ijm451 to wheel
+# no passwd login with visudo
+# yum-cron
+yum -y install yum-cron
+chkconfig yum-cron on
+service yum-cron start
+# install packages for nfs and sssd 
+yum -y install nfs-utils samba sssd-ad sssd-krb5 sssd-ldap cyrus-sasl-gssapi 
+yum -y install sssd-client.i686
+# domain join and nfs testing
+mv /etc/samba/smb.conf /etc/samba/smb.conf_backup
+# edit /etc/samba/smb.conf
+net ads join -U soh516 createcomputer=ResearchComputingOU/GEOLOU
+# Failed to join domain: failed to set machine spn: Constraint violation
+# I had to follow my notes of 2017-06-08
+# I need password to login!! weird!!
+echo "SECURE_NFS="yes"" >> /etc/sysconfig/nfs
+service rpcgssd start
+chkconfig rpcgssd on
+mount -t nfs4 -o sec=krb5,exec nfsfiles.usask.ca:/ /mnt
+ls -al /mnt
+umount /mnt
+yum -y install xorg-x11-apps
+yum -y install openmotif
+yum -y install openmotif22
+yum -y install openmotif22.i686
+yum -y install libstdc++.i686
+yum -y install doxygen
+
+wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+rpm -Uvh epel-release-latest-6.noarch.rpm
+rm epel-release-latest-6.noarch.rpm
+
+yum install xpdf
+
+rpm -Uvh pvm-3.4.6-1.el6.x86_64.rpm
+
+yum -y install cairo-devel
+yum -y install compat-gcc-34
+# I have to ask rhn to enable rhel-x86_64-workstation-dts2-6 for pwave
+yum -y install devtoolset-2-gcc-c++
+yum -y install compat-libf2c-34
+yum -y install compat-readline5
+yum -y install compiz
+yum -y install emacs
+yum -y install gcc-c++
+yum -y install gcc-gfortran
+yum -y install numpy
+yum -y install scipy
+yum -y install python-matplotlib
+yum -y install texlive
+yum -y install xinetd
+yum -y install xsane
+yum -y install octave
+echo /geoepos/apps/LGC/ProMAX/sys/lib/ > /etc/ld.so.conf.d/promax.conf
+ldconfig
+yum -y install libXext-devel
+# edit /etc/services
+yum -y install nc
+yum -y install ORBit2-devel
+yum -y install akonadi
+yum -y install kdepimlibs-akonadi
+yum -y install atk-devel
+yum -y install check
+yum -y install check-devel
+yum -y install gd
+yum -y install gimp
+yum -y install kdm
+yum -y install kmid
+# edit users group
+chown -R root:users /data/
+chmod 770 /data
+# X11 issue
+# edit /etc/gdm/custom.conf
+# disable user list @ login
+gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults --type bool --set /apps/gdm/simple-greeter/disable_user_list true
+reboot
+# printer hp4025-geol135
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
