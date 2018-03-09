@@ -92,6 +92,12 @@ chmod 770 /data
 # edit /etc/gdm/custom.conf
 # disable user list @ login
 gconftool-2 --direct --config-source=xml:readwrite:/etc/gconf/gconf.xml.defaults --type bool --set /apps/gdm/simple-greeter/disable_user_list true
+
+#kde desktop
+yum groupinstall kde-desktop
+
+yum -y install compat-libgfortran-41
+
 reboot
 # printer hp4025-geol135
 
