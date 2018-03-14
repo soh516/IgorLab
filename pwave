@@ -98,6 +98,7 @@ yum groupinstall kde-desktop
 
 yum -y install compat-libgfortran-41
 
+mkdir /opt/nfsapps
 echo "nfsfiles.usask.ca:/app    /opt/nfsapps    nfs    sec=krb5,exec,vers=4,_netdev   0  0" >> /etc/fstab
 mount /opt/nfsapps
 
