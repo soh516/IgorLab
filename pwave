@@ -98,6 +98,9 @@ yum groupinstall kde-desktop
 
 yum -y install compat-libgfortran-41
 
+echo "nfsfiles.usask.ca:/app    /opt/nfsapps    nfs    sec=krb5,exec,vers=4,_netdev   0  0" >> /etc/fstab
+mount /opt/nfsapps
+
 reboot
 # printer hp4025-geol135
 
