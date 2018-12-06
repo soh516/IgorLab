@@ -1,15 +1,15 @@
 #!/bin/bash
 
-# This script will be located @ /home/soh516/engr-ece/Igorlab
+# This script will be located @ /home/soh516/engr-ece/IgorLab
 # geofile-home is a clean home dir list from geofile-home for active users
-# geofile-home will be located @ /home/soh516/engr-ece/Igorlab
+# geofile-home will be located @ /home/soh516/engr-ece/IgorLab
 # homedirchecklog is the normal action log
 # homedircheckerrorlog is the error log 
 
 today=`/bin/date '+%Y_%m_%d_%H_%M_%S'`;
-logfile="/home/soh516/engr-ece/Igorlab/homedirchecklog_$today"
+logfile="/home/soh516/engr-ece/IgorLab/homedirchecklog_$today"
 /bin/touch $logfile
-errorlogfile="/home/soh516/engr-ece/Igorlab/homedircheckerrorlog_$today"
+errorlogfile="/home/soh516/engr-ece/IgorLab/homedircheckerrorlog_$today"
 /bin/touch $errorlogfile
 
 function chk {
@@ -41,4 +41,4 @@ while IFS= read -r THELINE; do
         checkquota $THELINE
      fi
 fi
-done < /home/soh516/engr-ece/Igorlab/geofile-home
+done < /home/soh516/engr-ece/IgorLab/geofile-home
