@@ -35,7 +35,7 @@ while IFS= read -r THELINE; do
      if [ "$THELINE" == "morozov" ]
      then
         # nsid for morozov is igm852 
-        checkquota lil997
+        checkquota igm852
      else
         # normal nsid
         checkquota $THELINE
