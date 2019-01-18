@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# This script will be located @ /mnt/datastore/soh516/labsDir/igorlab
+# errorlog is the error log 
+
+today=`date '+%Y_%m_%d_%H_%M_%S'`;
+errorlogfile="/mnt/datastore/soh516/labsDir/igorlab/work0errorlog_$today"
+/bin/touch $errorlogfile
+
+function chk {
+  if [ $? -ne 0 ] ; then
+    /bin/echo "ERROR: $1"
+#    exit 1
+  fi
+}
+
+find /mnt/nfsfiles/group/geol_geofile/work0/ -mindepth 1 -type d -print0 | xargs -0 chmod 770
+chk "can not fix permission for dir" >> $errorlogfile
+
+find /mnt/nfsfiles/group/geol_geofile/work0/ -type f -print0 | xargs -0 chmod g+rw,o-rwx
+chk "can not fix permission for file" >> $errorlogfile
