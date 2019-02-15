@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# This script will be located @ /data/home/copy_dir/tmp
+# This script will be located @ /data/home/copy_dir/geofile/tmp
 # geofile-home is a clean home dir list from geofile-home
-# geofile-home will be located @ /data/home/copy_dir/tmp
+# geofile-home will be located @ /data/home/copy_dir/geofile/tmp
 # movedatalog is the normal action log
 # movedataerrorlog is the error log 
 
